@@ -42,6 +42,7 @@ plugins {
     id("com.matthewprenger.cursegradle") version "1.1.0"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
+    id "org.sonarqube" version "3.0"
 }
 
 apply {
@@ -488,6 +489,16 @@ fun BintrayExtension.version(config: VersionConfig.() -> Unit) {
         this.pkg.version = it
     }
 }
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "fclinton_GregTech"
+    property "sonar.organization", "fclinton"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
+
+
 
 bintray {
     val bintrayUser = if (project.hasProperty("bintrayUser")) project.property("bintrayUser") as String else System.getenv("BINTRAY_USER")
